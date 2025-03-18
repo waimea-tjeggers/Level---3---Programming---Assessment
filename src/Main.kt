@@ -3,8 +3,8 @@
  * Programming Project for NCEA Level 3, Standard 91906
  * ---------------------------------------------------------------------
  * Project Name:   PROJECT NAME HERE
- * Project Author: PROJECT AUTHOR HERE
- * GitHub Repo:    GITHUB REPO URL HERE
+ * Project Author: Tyler Eggers
+ * GitHub Repo:    https://github.com/waimea-tjeggers/Level---3---Programming---Assessment
  * ---------------------------------------------------------------------
  * Notes:
  * PROJECT NOTES HERE
