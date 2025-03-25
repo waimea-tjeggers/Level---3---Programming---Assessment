@@ -42,7 +42,19 @@ class App() {
     var clicks = 0
 
     // Application logic functions
-    fun updateClickCount() {
+    fun moveSouth() {
+        clicks++
+        if (clicks > MAX_CLICKS) clicks = MAX_CLICKS
+    }
+    fun moveNorth() {
+        clicks++
+        if (clicks > MAX_CLICKS) clicks = MAX_CLICKS
+    }
+    fun moveWest() {
+        clicks++
+        if (clicks > MAX_CLICKS) clicks = MAX_CLICKS
+    }
+    fun moveEast() {
         clicks++
         if (clicks > MAX_CLICKS) clicks = MAX_CLICKS
     }
@@ -57,8 +69,10 @@ class App() {
 class MainWindow(val app: App) : JFrame(), ActionListener {
 
     // Fields to hold the UI elements
-    private lateinit var clicksLabel: JLabel
-    private lateinit var clickButton: JButton
+    private lateinit var northButton: JButton
+    private lateinit var southButton: JButton
+    private lateinit var eastButton: JButton
+    private lateinit var westButton: JButton
 
     /**
      * Configure the UI and display it
@@ -77,8 +91,8 @@ class MainWindow(val app: App) : JFrame(), ActionListener {
      * Configure the main window
      */
     private fun configureWindow() {
-        title = "Kotlin Swing GUI Demo"
-        contentPane.preferredSize = Dimension(600, 350)
+        title = "THE CASTLE OF LORD VOLKINHAR"
+        contentPane.preferredSize = Dimension(1000, 500)
         defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
         isResizable = false
         layout = null
@@ -92,17 +106,29 @@ class MainWindow(val app: App) : JFrame(), ActionListener {
     private fun addControls() {
         val baseFont = Font(Font.SANS_SERIF, Font.PLAIN, 36)
 
-        clicksLabel = JLabel("CLICK INFO HERE")
-        clicksLabel.horizontalAlignment = SwingConstants.CENTER
-        clicksLabel.bounds = Rectangle(50, 50, 500, 100)
-        clicksLabel.font = baseFont
-        add(clicksLabel)
+        northButton = JButton("↑")
+        northButton.horizontalAlignment = SwingConstants.CENTER
+        northButton.bounds = Rectangle(0, 10, 70, 70)
+        northButton.font = baseFont
+        add(northButton)
 
-        clickButton = JButton("Click Me!")
-        clickButton.bounds = Rectangle(50,200,500,100)
-        clickButton.font = baseFont
-        clickButton.addActionListener(this)     // Handle any clicks
-        add(clickButton)
+        southButton = JButton("↓")
+        southButton.bounds = Rectangle(0,50,70,70)
+        southButton.font = baseFont
+        southButton.addActionListener(this)     // Handle any clicks
+        add(southButton)
+
+        eastButton = JButton("↓")
+        eastButton.bounds = Rectangle(0,90,70,70)
+        eastButton.font = baseFont
+        eastButton.addActionListener(this)     // Handle any clicks
+        add(eastButton)
+
+        westButton = JButton("↓")
+        westButton.bounds = Rectangle(0,130,70,70)
+        westButton.font = baseFont
+        westButton.addActionListener(this)     // Handle any clicks
+        add(westButton)
     }
 
 
@@ -112,12 +138,12 @@ class MainWindow(val app: App) : JFrame(), ActionListener {
      */
     fun updateView() {
         if (app.clicks == app.MAX_CLICKS) {
-            clicksLabel.text = "Max clicks reached!"
-            clickButton.isEnabled = false
+            northButton.text = "Max clicks reached!"
+            southButton.isEnabled = false
         }
         else {
-            clicksLabel.text = "You clicked ${app.clicks} times"
-            clickButton.isEnabled = true
+            northButton.text = "You clicked ${app.clicks} times"
+            southButton.isEnabled = true
         }
     }
 
@@ -128,8 +154,8 @@ class MainWindow(val app: App) : JFrame(), ActionListener {
      */
     override fun actionPerformed(e: ActionEvent?) {
         when (e?.source) {
-            clickButton -> {
-                app.updateClickCount()
+            southButton -> {
+                app.moveSouth()
                 updateView()
             }
         }
