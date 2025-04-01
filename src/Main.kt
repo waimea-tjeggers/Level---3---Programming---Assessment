@@ -7,7 +7,10 @@
  * GitHub Repo:    https://github.com/waimea-tjeggers/Level---3---Programming---Assessment
  * ---------------------------------------------------------------------
  * Notes:
- * PROJECT NOTES HERE
+ * Find 3 key items
+ * multiple rooms across the castle
+ * solve riddles
+ * interact with items in certain rooms
  * =====================================================================
  */
 
@@ -29,6 +32,8 @@ fun main() {
 }
 
 
+class Room(val name: String, val description: String, val north: Int, val east: Int, val south: Int, val west: Int )
+
 /**
  * The application class (model)
  * This is the place where any application data should be
@@ -36,27 +41,40 @@ fun main() {
  */
 class App() {
     // Constants defining any key values
-    val MAX_CLICKS = 10
+    val BLOCKED = -1
 
     // Data fields
-    var clicks = 0
+    var rooms = mutableListOf<Room>()
+    var currentRoom = 0
+
+    init {
+        setupMap()
+    }
+
+    fun setupMap() {
+        val entrance = Room("Entrance", "blah blah", 1, 5, BLOCKED, 3)
+        val grandhall = Room( "grandhall", "blah blah", 2, 9, 0 , 7)
+        val throneroom = Room( "throneroom", "blah blah", 22,BLOCKED, 1, BLOCKED )
+        val barracks = Room( "barracks", "blah barracks", BLOCKED, 0, BLOCKED, 4)
+        val southWestTower = Room("South West Tower", "blah blah blah", 8, 3, BLOCKED, BLOCKED)
+        val supplyRoom = Room("supply", "blah blah blah", 6, BLOCKED, 0, BLOCKED )
+        val southEastTower = Room ("South East Tower", "blah blah blah", 10, BLOCKED, BLOCKED , 5)
+        val lowerWesternHallway = Room("Lower Western Hallway", "blah blah blah", 12, 1, BLOCKED, 8)
+        
+        rooms.add(entrance)
+        rooms.add(grandhall)
+        rooms.add(throneroom)
+
+    }
 
     // Application logic functions
     fun moveSouth() {
-        clicks++
-        if (clicks > MAX_CLICKS) clicks = MAX_CLICKS
     }
     fun moveNorth() {
-        clicks++
-        if (clicks > MAX_CLICKS) clicks = MAX_CLICKS
     }
     fun moveWest() {
-        clicks++
-        if (clicks > MAX_CLICKS) clicks = MAX_CLICKS
     }
     fun moveEast() {
-        clicks++
-        if (clicks > MAX_CLICKS) clicks = MAX_CLICKS
     }
 }
 
@@ -137,14 +155,7 @@ class MainWindow(val app: App) : JFrame(), ActionListener {
      * of the application model
      */
     fun updateView() {
-        if (app.clicks == app.MAX_CLICKS) {
-            northButton.text = "Max clicks reached!"
-            southButton.isEnabled = false
-        }
-        else {
-            northButton.text = "You clicked ${app.clicks} times"
-            southButton.isEnabled = true
-        }
+        //nameLabel.text = app.rooms[app.currentRoom].name
     }
 
     /**
