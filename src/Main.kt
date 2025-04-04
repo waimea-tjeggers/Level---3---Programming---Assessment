@@ -53,22 +53,61 @@ class App() {
 
     fun setupMap() {
         val entrance = Room("Entrance", "blah blah", 1, 5, BLOCKED, 3)
-        val grandhall = Room( "grandhall", "blah blah", 2, 9, 0 , 7)
-        val throneroom = Room( "throneroom", "blah blah", 22,BLOCKED, 1, BLOCKED )
-        val barracks = Room( "barracks", "blah barracks", BLOCKED, 0, BLOCKED, 4)
+        val grandhall = Room( "Grandhall", "blah blah", 2, 9, 0 , 7)
+        val throneroom = Room( "Throneroom", "blah blah", 22,BLOCKED, 1, BLOCKED )
+        val barracks = Room( "Barracks", "blah barracks", BLOCKED, 0, BLOCKED, 4)
         val southWestTower = Room("South West Tower", "blah blah blah", 8, 3, BLOCKED, BLOCKED)
-        val supplyRoom = Room("supply", "blah blah blah", 6, BLOCKED, 0, BLOCKED )
+        val supplyRoom = Room("The Supply Room", "blah blah blah", 6, BLOCKED, 0, BLOCKED )
         val southEastTower = Room ("South East Tower", "blah blah blah", 10, BLOCKED, BLOCKED , 5)
         val lowerWesternHallway = Room("Lower Western Hallway", "blah blah blah", 12, 1, BLOCKED, 8)
-        
+        val queensGardens = Room ("The Queens Gardens", "blah blah blah", 13,7,4,BLOCKED)
+        val lowerEasternHallway = Room ("Lower Eastern Hallway", "blah blah blah", 11, 10, BLOCKED ,1)
+        val trainingGrounds = Room ("Training Grounds", "blah blah blah", 18, BLOCKED , 6, 9 )
+        val kitchen = Room ("kitchen", "blah blah blah", 17, BLOCKED, 9, BLOCKED)
+        val grandLibrary = Room ("Grand Library", "blah blah blah", 16, BLOCKED, 7, BLOCKED)
+        val caretakersShed = Room ("The Caretakers Shed", "blah blah blah", 14, BLOCKED,8,BLOCKED)
+        val servantsQuarters = Room ("The Servants Quarters", "blah blah blah", 15, BLOCKED, 13, BLOCKED)
+        val northWestTower = Room ("North West Tower", "Blah blah blah", BLOCKED, 21,14,BLOCKED)
+        val wizardsAlcove = Room ("The Wizards Alcove", "blah blah blah", BLOCKED, BLOCKED, 12, BLOCKED)
+        val incinerator = Room ("The Incinerator", "blah blah blah", BLOCKED, 18 ,17 , BLOCKED)
+        val grandForge = Room ("The Grand Forge", "blah blah blah", 19, BLOCKED, 10, 17)
+        val northEastTower = Room ("North East Tower", "blah blah blah", BLOCKED, BLOCKED, 18, 20)
+        val princessRoom = Room ("Princesses Bedroom", "blah blah blah", BLOCKED, 19,  BLOCKED, BLOCKED)
+        val parentsBedroom = Room ("The King and Queens Bedroom", "Blah blah blah", BLOCKED, BLOCKED, BLOCKED, 15)
+        val secretRoom = Room ("The Hidden Room", "blah blah blah", 23, BLOCKED,2,BLOCKED)
+        val exit = Room ("The Exit Tunnel", "blah blah blah", BLOCKED, BLOCKED, 22,BLOCKED)
+
+
         rooms.add(entrance)
         rooms.add(grandhall)
         rooms.add(throneroom)
+        rooms.add(barracks)
+        rooms.add(southWestTower)
+        rooms.add(supplyRoom)
+        rooms.add(southEastTower)
+        rooms.add(lowerWesternHallway)
+        rooms.add(queensGardens)
+        rooms.add(lowerEasternHallway)
+        rooms.add(trainingGrounds)
+        rooms.add(kitchen)
+        rooms.add(grandLibrary)
+        rooms.add(caretakersShed)
+        rooms.add(servantsQuarters)
+        rooms.add(northWestTower)
+        rooms.add(wizardsAlcove)
+        rooms.add(incinerator)
+        rooms.add(grandForge)
+        rooms.add(northEastTower)
+        rooms.add(princessRoom)
+        rooms.add(parentsBedroom)
+        rooms.add(secretRoom)
+        rooms.add(exit)
 
     }
 
     // Application logic functions
     fun moveSouth() {
+        
     }
     fun moveNorth() {
     }
@@ -91,6 +130,8 @@ class MainWindow(val app: App) : JFrame(), ActionListener {
     private lateinit var southButton: JButton
     private lateinit var eastButton: JButton
     private lateinit var westButton: JButton
+    private lateinit var roomName : JLabel
+    private lateinit var roomDescription : JTextField
 
     /**
      * Configure the UI and display it
