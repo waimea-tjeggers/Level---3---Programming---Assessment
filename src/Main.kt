@@ -107,7 +107,7 @@ class App() {
 
     // Application logic functions
     fun moveSouth() {
-        
+
     }
     fun moveNorth() {
     }
@@ -130,8 +130,17 @@ class MainWindow(val app: App) : JFrame(), ActionListener {
     private lateinit var southButton: JButton
     private lateinit var eastButton: JButton
     private lateinit var westButton: JButton
+    private lateinit var gameTitle : JLabel
     private lateinit var roomName : JLabel
-    private lateinit var roomDescription : JTextField
+    private lateinit var roomDescription : JLabel
+    private lateinit var roomNameNorth : JLabel
+    private lateinit var roomNameEast : JLabel
+    private lateinit var roomNameSouth : JLabel
+    private lateinit var roomNameWest : JLabel
+    private lateinit var item1 : JLabel
+    private lateinit var item2 : JLabel
+    private lateinit var item3 : JLabel
+    private lateinit var item4 : JLabel
 
     /**
      * Configure the UI and display it
@@ -139,6 +148,7 @@ class MainWindow(val app: App) : JFrame(), ActionListener {
     init {
         configureWindow()               // Configure the window
         addControls()                   // Build the UI
+        addLabels()
 
         setLocationRelativeTo(null)     // Centre the window
         isVisible = true                // Make it visible
@@ -166,28 +176,39 @@ class MainWindow(val app: App) : JFrame(), ActionListener {
         val baseFont = Font(Font.SANS_SERIF, Font.PLAIN, 36)
 
         northButton = JButton("↑")
-        northButton.horizontalAlignment = SwingConstants.CENTER
-        northButton.bounds = Rectangle(0, 10, 70, 70)
+        northButton.bounds = Rectangle(0, 10, 70, 40)
         northButton.font = baseFont
+//        northButton.background = Color(0,0,0,0)
+//        northButton.border = null
         add(northButton)
 
         southButton = JButton("↓")
-        southButton.bounds = Rectangle(0,50,70,70)
+        southButton.bounds = Rectangle(0,50,70,40)
         southButton.font = baseFont
-        southButton.addActionListener(this)     // Handle any clicks
+        southButton.addActionListener(this)
         add(southButton)
 
-        eastButton = JButton("↓")
-        eastButton.bounds = Rectangle(0,90,70,70)
+        eastButton = JButton("→")
+        eastButton.bounds = Rectangle(0,90,70,40)
         eastButton.font = baseFont
-        eastButton.addActionListener(this)     // Handle any clicks
+        eastButton.addActionListener(this)
         add(eastButton)
 
-        westButton = JButton("↓")
-        westButton.bounds = Rectangle(0,130,70,70)
+        westButton = JButton("←")
+        westButton.bounds = Rectangle(0,130,70,40)
         westButton.font = baseFont
-        westButton.addActionListener(this)     // Handle any clicks
+        westButton.addActionListener(this)
         add(westButton)
+    }
+
+    private fun addLabels(app: App) {
+        gameTitle = JLabel("The Castle of Lord Volkinhar")
+        gameTitle.bounds = Rectangle(265,0,390,50)
+        gameTitle.font = Font(Font.SANS_SERIF, Font.PLAIN, 24)
+        add(gameTitle)
+
+        roomName = JLabel("")
+
     }
 
 
