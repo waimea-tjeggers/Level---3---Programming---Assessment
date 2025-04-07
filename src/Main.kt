@@ -148,7 +148,7 @@ class MainWindow(val app: App) : JFrame(), ActionListener {
     init {
         configureWindow()               // Configure the window
         addControls()                   // Build the UI
-        addLabels()
+        addLabels(app = app)
 
         setLocationRelativeTo(null)     // Centre the window
         isVisible = true                // Make it visible
@@ -207,7 +207,36 @@ class MainWindow(val app: App) : JFrame(), ActionListener {
         gameTitle.font = Font(Font.SANS_SERIF, Font.PLAIN, 24)
         add(gameTitle)
 
-        roomName = JLabel("")
+        roomName = JLabel("${app.currentRoom}")
+        roomName.bounds = Rectangle(400,60, 115,30)
+        roomName.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
+        add(roomName)
+
+        roomDescription = JLabel("${app.currentRoom}")
+        roomDescription.bounds = Rectangle(300,120,295,125)
+        roomDescription.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
+        add(roomDescription)
+
+        roomNameNorth = JLabel("${app.currentRoom}")
+        roomNameNorth.bounds = Rectangle(70,10,195,40)
+        roomNameNorth.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
+        add(roomNameNorth)
+
+        roomNameEast = JLabel("${app.currentRoom}")
+        roomNameEast.bounds = Rectangle(70,50,195,40)
+        roomNameEast.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
+        add(roomNameEast)
+
+        roomNameSouth = JLabel("${app.currentRoom}")
+        roomNameSouth.bounds = Rectangle(70,90,195,40)
+        roomNameSouth.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
+        add(roomNameSouth)
+
+        roomNameWest = JLabel("${app.currentRoom}")
+        roomNameWest.bounds = Rectangle(70,130,195,40)
+        roomNameWest.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
+        add(roomNameWest)
+
 
     }
 
