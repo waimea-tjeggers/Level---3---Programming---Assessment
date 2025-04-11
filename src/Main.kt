@@ -40,17 +40,17 @@ class Room(val name: String, val description: String, val north: Int, val east: 
  * stored, plus any application logic functions
  */
 class App() {
-    // Constants defining any key values
+    // declaring blocked values
     val BLOCKED = -1
 
-    // Data fields
+    // made room list
     var rooms = mutableListOf<Room>()
     var currentRoom = 0
 
     init {
         setupMap()
     }
-
+    //Making Room List
     fun setupMap() {
         val entrance = Room("Entrance", "blah blah", 1, 5, BLOCKED, 3)
         val grandhall = Room( "Grandhall", "blah blah", 2, 9, 0 , 7)
@@ -77,7 +77,7 @@ class App() {
         val secretRoom = Room ("The Hidden Room", "blah blah blah", 23, BLOCKED,2,BLOCKED)
         val exit = Room ("The Exit Tunnel", "blah blah blah", BLOCKED, BLOCKED, 22,BLOCKED)
 
-
+        //adding rooms
         rooms.add(entrance)
         rooms.add(grandhall)
         rooms.add(throneroom)
@@ -107,7 +107,7 @@ class App() {
 
     // Application logic functions
     fun moveSouth() {
-
+        
     }
     fun moveNorth() {
     }
@@ -173,69 +173,97 @@ class MainWindow(val app: App) : JFrame(), ActionListener {
      * Populate the UI with UI controls
      */
     private fun addControls() {
-        val baseFont = Font(Font.SANS_SERIF, Font.PLAIN, 36)
+        val baseFont = Font(Font.SANS_SERIF, Font.PLAIN, 36,)
 
         northButton = JButton("↑")
         northButton.bounds = Rectangle(0, 10, 70, 40)
         northButton.font = baseFont
-//        northButton.background = Color(0,0,0,0)
-//        northButton.border = null
+        northButton.background = Color(0,0,0,0)
+        northButton.border = null
         add(northButton)
 
-        southButton = JButton("↓")
-        southButton.bounds = Rectangle(0,50,70,40)
-        southButton.font = baseFont
-        southButton.addActionListener(this)
-        add(southButton)
-
         eastButton = JButton("→")
-        eastButton.bounds = Rectangle(0,90,70,40)
+        eastButton.bounds = Rectangle(0,50,70,40)
         eastButton.font = baseFont
+        eastButton.background = Color(0,0,0,0)
+        eastButton.border = null
         eastButton.addActionListener(this)
         add(eastButton)
+
+        southButton = JButton("↓")
+        southButton.bounds = Rectangle(0,90,70,40)
+        southButton.font = baseFont
+        southButton.background = Color(0,0,0,0)
+        southButton.border = null
+        southButton.addActionListener(this)
+        add(southButton)
 
         westButton = JButton("←")
         westButton.bounds = Rectangle(0,130,70,40)
         westButton.font = baseFont
+        westButton.background = Color(0,0,0,0)
+        westButton.border = null
         westButton.addActionListener(this)
         add(westButton)
     }
 
+    //populate ui with labels
     private fun addLabels(app: App) {
         gameTitle = JLabel("The Castle of Lord Volkinhar")
         gameTitle.bounds = Rectangle(265,0,390,50)
         gameTitle.font = Font(Font.SANS_SERIF, Font.PLAIN, 24)
         add(gameTitle)
 
-        roomName = JLabel("${app.currentRoom}")
+        roomName = JLabel("NAME HERE")
         roomName.bounds = Rectangle(400,60, 115,30)
         roomName.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
         add(roomName)
 
-        roomDescription = JLabel("${app.currentRoom}")
+        roomDescription = JLabel("DESCRIPTION HERE")
         roomDescription.bounds = Rectangle(300,120,295,125)
         roomDescription.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
         add(roomDescription)
 
-        roomNameNorth = JLabel("${app.currentRoom}")
+        roomNameNorth = JLabel("ROOM NAME NORTH")
         roomNameNorth.bounds = Rectangle(70,10,195,40)
         roomNameNorth.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
         add(roomNameNorth)
 
-        roomNameEast = JLabel("${app.currentRoom}")
+        roomNameEast = JLabel("ROOM NAME EAST")
         roomNameEast.bounds = Rectangle(70,50,195,40)
         roomNameEast.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
         add(roomNameEast)
 
-        roomNameSouth = JLabel("${app.currentRoom}")
+        roomNameSouth = JLabel("ROOM NAME SOUTH")
         roomNameSouth.bounds = Rectangle(70,90,195,40)
         roomNameSouth.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
         add(roomNameSouth)
 
-        roomNameWest = JLabel("${app.currentRoom}")
+        roomNameWest = JLabel("ROOM NAME WEST")
         roomNameWest.bounds = Rectangle(70,130,195,40)
         roomNameWest.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
         add(roomNameWest)
+
+        item1 = JLabel("Item 1")
+        item1.bounds = Rectangle(685,10,300,50)
+        item1.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
+        item1.background = Color.BLACK
+        add(item1)
+
+        item2 = JLabel("Item 2")
+        item2.bounds = Rectangle(685,60,300,50)
+        item2.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
+        add(item2)
+
+        item3 = JLabel("Item 3")
+        item3.bounds = Rectangle(685,110,300,50)
+        item3.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
+        add(item3)
+
+        item4 = JLabel("Item 4")
+        item4.bounds = Rectangle(685,160,300,50)
+        item4.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
+        add(item4)
 
 
     }
@@ -246,7 +274,16 @@ class MainWindow(val app: App) : JFrame(), ActionListener {
      * of the application model
      */
     fun updateView() {
-        //nameLabel.text = app.rooms[app.currentRoom].name
+        val room = app.rooms[app.currentRoom]
+
+        roomName.text = room.name
+        roomDescription.text = room.description
+        roomNameNorth.text = app.rooms[room.north].name
+        roomNameEast.text = app.rooms[room.east].name
+        roomNameSouth.text = app.rooms[room.south].name
+        roomNameWest.text = app.rooms[room.west].name
+
+
     }
 
     /**
@@ -256,10 +293,7 @@ class MainWindow(val app: App) : JFrame(), ActionListener {
      */
     override fun actionPerformed(e: ActionEvent?) {
         when (e?.source) {
-            southButton -> {
-                app.moveSouth()
-                updateView()
-            }
+
         }
     }
 
