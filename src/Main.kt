@@ -161,7 +161,7 @@ class MainWindow(val app: App) : JFrame(), ActionListener {
      */
     private fun configureWindow() {
         title = "THE CASTLE OF LORD VOLKINHAR"
-        contentPane.preferredSize = Dimension(1000, 500)
+        contentPane.preferredSize = Dimension(1000, 400)
         defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
         isResizable = false
         layout = null
@@ -244,26 +244,31 @@ class MainWindow(val app: App) : JFrame(), ActionListener {
         roomNameWest.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
         add(roomNameWest)
 
-        item1 = JLabel("Item 1")
+        //items will be revealed when they are found
+        item1 = JLabel("")
         item1.bounds = Rectangle(685,10,300,50)
         item1.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
         item1.background = Color.BLACK
         add(item1)
 
-        item2 = JLabel("Item 2")
+
+        item2 = JLabel("")
         item2.bounds = Rectangle(685,60,300,50)
         item2.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
         add(item2)
 
-        item3 = JLabel("Item 3")
+
+        item3 = JLabel("")
         item3.bounds = Rectangle(685,110,300,50)
         item3.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
         add(item3)
 
-        item4 = JLabel("Item 4")
+
+        item4 = JLabel("")
         item4.bounds = Rectangle(685,160,300,50)
         item4.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
         add(item4)
+
 
 
     }
@@ -278,10 +283,10 @@ class MainWindow(val app: App) : JFrame(), ActionListener {
 
         roomName.text = room.name
         roomDescription.text = room.description
-        roomNameNorth.text = app.rooms[room.north].name
-        roomNameEast.text = app.rooms[room.east].name
-        roomNameSouth.text = app.rooms[room.south].name
-        roomNameWest.text = app.rooms[room.west].name
+        roomNameNorth.text = if(room.north == app.BLOCKED) "BLOCKED" else app.rooms[room.north].name
+        roomNameEast.text = if(room.north == app.BLOCKED) "BLOCKED" else app.rooms[room.east].name
+        roomNameSouth.text = if(room.south == app.BLOCKED) "BLOCKED" else app.rooms[room.south].name
+        roomNameWest.text = if(room.north == app.BLOCKED) "BLOCKED" else app.rooms[room.west].name
 
 
     }
