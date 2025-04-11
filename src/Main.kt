@@ -107,7 +107,7 @@ class App() {
 
     // Application logic functions
     fun moveSouth() {
-        
+
     }
     fun moveNorth() {
     }
