@@ -102,7 +102,7 @@ class App() {
 
     // Application logic functions
     fun moveSouth() {
-
+        var currentRoom = rooms
     }
     fun moveNorth() {
     }
