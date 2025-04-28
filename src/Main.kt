@@ -7,10 +7,7 @@
  * GitHub Repo:    https://github.com/waimea-tjeggers/Level---3---Programming---Assessment
  * ---------------------------------------------------------------------
  * Notes:
- * Find 3 key items
- * multiple rooms across the castle
- * solve riddles
- * interact with items in certain rooms
+ * Maze
  * =====================================================================
  */
 
@@ -54,7 +51,7 @@ class App() {
     fun setupMap() {
         val entrance = Room("Entrance", "blah blah", 1, 5, BLOCKED, 3)
         val grandhall = Room( "Grandhall", "blah blah", 2, 9, 0 , 7)
-        val throneroom = Room( "Throneroom", "blah blah", 22,BLOCKED, 1, BLOCKED )
+        val throneroom = Room( "Throneroom", "blah blah", BLOCKED,BLOCKED, 1, BLOCKED )
         val barracks = Room( "Barracks", "blah barracks", BLOCKED, 0, BLOCKED, 4)
         val southWestTower = Room("South West Tower", "blah blah blah", 8, 3, BLOCKED, BLOCKED)
         val supplyRoom = Room("The Supply Room", "blah blah blah", 6, BLOCKED, 0, BLOCKED )
@@ -73,9 +70,8 @@ class App() {
         val grandForge = Room ("The Grand Forge", "blah blah blah", 19, BLOCKED, 10, 17)
         val northEastTower = Room ("North East Tower", "blah blah blah", BLOCKED, BLOCKED, 18, 20)
         val princessRoom = Room ("Princesses Bedroom", "blah blah blah", BLOCKED, 19,  BLOCKED, BLOCKED)
-        val parentsBedroom = Room ("The King and Queens Bedroom", "Blah blah blah", BLOCKED, BLOCKED, BLOCKED, 15)
-        val secretRoom = Room ("The Hidden Room", "blah blah blah", 23, BLOCKED,2,BLOCKED)
-        val exit = Room ("The Exit Tunnel", "blah blah blah", BLOCKED, BLOCKED, 22,BLOCKED)
+        val parentsBedroom = Room ("The King and Queens Bedroom", "Blah blah blah", 22, BLOCKED, BLOCKED, 15)
+        val exit = Room ("The Exit Tunnel", "blah blah blah", BLOCKED, BLOCKED, 21,BLOCKED)
 
         //adding rooms
         rooms.add(entrance)
@@ -100,7 +96,6 @@ class App() {
         rooms.add(northEastTower)
         rooms.add(princessRoom)
         rooms.add(parentsBedroom)
-        rooms.add(secretRoom)
         rooms.add(exit)
 
     }
@@ -137,11 +132,6 @@ class MainWindow(val app: App) : JFrame(), ActionListener {
     private lateinit var roomNameEast : JLabel
     private lateinit var roomNameSouth : JLabel
     private lateinit var roomNameWest : JLabel
-    private lateinit var item1 : JLabel
-    private lateinit var item2 : JLabel
-    private lateinit var item3 : JLabel
-    private lateinit var item4 : JLabel
-
     /**
      * Configure the UI and display it
      */
@@ -219,7 +209,7 @@ class MainWindow(val app: App) : JFrame(), ActionListener {
         roomName.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
         add(roomName)
 
-        roomDescription = JLabel("DESCRIPTION HERE")
+        roomDescription = JLabel("Description HERE")
         roomDescription.bounds = Rectangle(300,120,295,125)
         roomDescription.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
         add(roomDescription)
@@ -244,30 +234,6 @@ class MainWindow(val app: App) : JFrame(), ActionListener {
         roomNameWest.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
         add(roomNameWest)
 
-        //items will be revealed when they are found
-        item1 = JLabel("")
-        item1.bounds = Rectangle(685,10,300,50)
-        item1.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
-        item1.background = Color.BLACK
-        add(item1)
-
-
-        item2 = JLabel("")
-        item2.bounds = Rectangle(685,60,300,50)
-        item2.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
-        add(item2)
-
-
-        item3 = JLabel("")
-        item3.bounds = Rectangle(685,110,300,50)
-        item3.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
-        add(item3)
-
-
-        item4 = JLabel("")
-        item4.bounds = Rectangle(685,160,300,50)
-        item4.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
-        add(item4)
 
 
 
