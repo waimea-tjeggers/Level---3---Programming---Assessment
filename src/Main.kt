@@ -29,7 +29,14 @@ fun main() {
 }
 
 
-class Room(val name: String, val description: String, val north: Int, val east: Int, val south: Int, val west: Int )
+class Room(
+    val name: String,
+    val description: String,
+    val north: Int,
+    val east: Int,
+    val south: Int,
+    val west: Int
+)
 
 /**
  * The application class (model)
@@ -54,8 +61,8 @@ class App() {
         val throneroom = Room( "Throneroom", "blah blah", BLOCKED,BLOCKED, 1, BLOCKED )
         val barracks = Room( "Barracks", "blah barracks", BLOCKED, 0, BLOCKED, 4)
         val southWestTower = Room("South West Tower", "blah blah blah", 8, 3, BLOCKED, BLOCKED)
-        val supplyRoom = Room("The Supply Room", "blah blah blah", 6, BLOCKED, 0, BLOCKED )
-        val southEastTower = Room ("South East Tower", "blah blah blah", 10, BLOCKED, BLOCKED , 5)
+        val supplyRoom = Room("The Supply Room", "blah blah blah", 6, BLOCKED, BLOCKED, 0 )
+        val southEastTower = Room ("South East Tower", "blah blah blah", 10, BLOCKED, 5, BLOCKED)
         val lowerWesternHallway = Room("Lower Western Hallway", "blah blah blah", 12, 1, BLOCKED, 8)
         val queensGardens = Room ("The Queens Gardens", "blah blah blah", 13,7,4,BLOCKED)
         val lowerEasternHallway = Room ("Lower Eastern Hallway", "blah blah blah", 11, 10, BLOCKED ,1)
@@ -66,12 +73,12 @@ class App() {
         val servantsQuarters = Room ("The Servants Quarters", "blah blah blah", 15, BLOCKED, 13, BLOCKED)
         val northWestTower = Room ("North West Tower", "Blah blah blah", BLOCKED, 21,14,BLOCKED)
         val wizardsAlcove = Room ("The Wizards Alcove", "blah blah blah", BLOCKED, BLOCKED, 12, BLOCKED)
-        val incinerator = Room ("The Incinerator", "blah blah blah", BLOCKED, 18 ,17 , BLOCKED)
+        val incinerator = Room ("The Incinerator", "blah blah blah", BLOCKED, 18 ,11 , BLOCKED)
         val grandForge = Room ("The Grand Forge", "blah blah blah", 19, BLOCKED, 10, 17)
         val northEastTower = Room ("North East Tower", "blah blah blah", BLOCKED, BLOCKED, 18, 20)
         val princessRoom = Room ("Princesses Bedroom", "blah blah blah", BLOCKED, 19,  BLOCKED, BLOCKED)
         val parentsBedroom = Room ("The King and Queens Bedroom", "Blah blah blah", 22, BLOCKED, BLOCKED, 15)
-        val exit = Room ("The Exit Tunnel", "blah blah blah", BLOCKED, BLOCKED, 21,BLOCKED)
+        val exit = Room ("The Exit Tunnel", "blah blah blah", BLOCKED, BLOCKED, BLOCKED,BLOCKED)
 
         //adding rooms
         rooms.add(entrance)
@@ -100,16 +107,6 @@ class App() {
 
     }
 
-    // Application logic functions
-    fun moveSouth() {
-        var currentRoom = rooms
-    }
-    fun moveNorth() {
-    }
-    fun moveWest() {
-    }
-    fun moveEast() {
-    }
 }
 
 
@@ -170,6 +167,7 @@ class MainWindow(val app: App) : JFrame(), ActionListener {
         northButton.font = baseFont
         northButton.background = Color(0,0,0,0)
         northButton.border = null
+        northButton.addActionListener(this)
         add(northButton)
 
         eastButton = JButton("→")
@@ -205,7 +203,7 @@ class MainWindow(val app: App) : JFrame(), ActionListener {
         add(gameTitle)
 
         roomName = JLabel("NAME HERE")
-        roomName.bounds = Rectangle(400,60, 115,30)
+        roomName.bounds = Rectangle(400,60, 250,30)
         roomName.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
         add(roomName)
 
@@ -215,22 +213,22 @@ class MainWindow(val app: App) : JFrame(), ActionListener {
         add(roomDescription)
 
         roomNameNorth = JLabel("ROOM NAME NORTH")
-        roomNameNorth.bounds = Rectangle(70,10,195,40)
+        roomNameNorth.bounds = Rectangle(70,10,250,40)
         roomNameNorth.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
         add(roomNameNorth)
 
         roomNameEast = JLabel("ROOM NAME EAST")
-        roomNameEast.bounds = Rectangle(70,50,195,40)
+        roomNameEast.bounds = Rectangle(70,50,250,40)
         roomNameEast.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
         add(roomNameEast)
 
         roomNameSouth = JLabel("ROOM NAME SOUTH")
-        roomNameSouth.bounds = Rectangle(70,90,195,40)
+        roomNameSouth.bounds = Rectangle(70,90,250,40)
         roomNameSouth.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
         add(roomNameSouth)
 
         roomNameWest = JLabel("ROOM NAME WEST")
-        roomNameWest.bounds = Rectangle(70,130,195,40)
+        roomNameWest.bounds = Rectangle(70,130,250,40)
         roomNameWest.font = Font(Font.SANS_SERIF, Font.PLAIN, 15)
         add(roomNameWest)
 
@@ -250,11 +248,14 @@ class MainWindow(val app: App) : JFrame(), ActionListener {
         roomName.text = room.name
         roomDescription.text = room.description
         roomNameNorth.text = if(room.north == app.BLOCKED) "BLOCKED" else app.rooms[room.north].name
-        roomNameEast.text = if(room.north == app.BLOCKED) "BLOCKED" else app.rooms[room.east].name
+        roomNameEast.text = if(room.east == app.BLOCKED) "BLOCKED" else app.rooms[room.east].name
         roomNameSouth.text = if(room.south == app.BLOCKED) "BLOCKED" else app.rooms[room.south].name
-        roomNameWest.text = if(room.north == app.BLOCKED) "BLOCKED" else app.rooms[room.west].name
+        roomNameWest.text = if(room.west == app.BLOCKED) "BLOCKED" else app.rooms[room.west].name
 
-
+        northButton.isEnabled = room.north != app.BLOCKED
+        eastButton.isEnabled = room.east != app.BLOCKED
+        southButton.isEnabled = room.south != app.BLOCKED
+        westButton.isEnabled = room.west != app.BLOCKED
     }
 
     /**
@@ -263,9 +264,16 @@ class MainWindow(val app: App) : JFrame(), ActionListener {
      * then refreshing the UI view
      */
     override fun actionPerformed(e: ActionEvent?) {
-        when (e?.source) {
+        val room = app.rooms[app.currentRoom]
 
+        when (e?.source) {
+            northButton -> app.currentRoom = room.north
+            eastButton -> app.currentRoom = room.east
+            southButton -> app.currentRoom = room.south
+            westButton -> app.currentRoom = room.west
         }
+
+        updateView()
     }
 
 }
